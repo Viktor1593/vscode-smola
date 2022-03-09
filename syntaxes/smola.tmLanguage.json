@@ -12,7 +12,7 @@
 		{ "include": "#nameclass" },
 		{ "include": "#function"},
 		{ "include": "#method-call" },
-		
+
 		{
 			"match": "\\b(catch|try)\\b",
 			"name": "keyword.control.exception.smola"
@@ -656,9 +656,10 @@
 		"keywords": {
 			"patterns": [{
 				"name": "keyword.control.${1:/downcase}.smola",
-				"match": "\\b(try|catch|singleShotTimer|periodicTimer|if|else|while|foreach|for|delete|from|clear|break|contains|sizeOf|typeOf|popBack|popFront|pushBack|pushFront|newModelInstance|deleteModelInstance|emitEvent|insertElement|updateElement|registerHandler|deleteElement|sleep|serialize|deserialize|serializeValue|deserializeValue|serializeV3|deserializeV3|serializeValueV3|deserializeValueV3|readLock|unlock|writeLock|hash|toDec|toHex|fromDec|fromHex|fromBase64|toBase64|currentTime|convert|and|in|is|not|AND|NOT|or|OR|xor|XOR|True|False|TRUE|FALSE|true|false)\\b"
+				"match": "\\b(switch|case|try|catch|singleShotTimer|periodicTimer|if|else|while|foreach|for|delete|from|clear|break|contains|sizeOf|typeOf|popBack|popFront|pushBack|pushFront|newModelInstance|deleteModelInstance|emitEvent|insertElement|updateElement|registerHandler|deleteElement|sleep|serialize|deserialize|serializeValue|deserializeValue|serializeV3|deserializeV3|serializeValueV3|deserializeValueV3|readLock|unlock|writeLock|hash|toDec|toHex|fromDec|fromHex|fromBase64|toBase64|currentTime|convert|and|in|is|not|AND|NOT|or|OR|xor|XOR|True|False|TRUE|FALSE|true|false)\\b"
 			}]
 		},
+		
 		"numeric": {
 			"patterns": [{
 				"name": "constant.numeric.smola",
@@ -685,7 +686,7 @@
 		},
 		"language": {
 			"patterns": [{
-				"name": "constant.language.smola",
+				"name": "storage.modifier.smola",
 				"match": "\\b(static)\\b"
 			}]
 		},
