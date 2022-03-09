@@ -1,0 +1,717 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Smola",
+	"scopeName": "source.smola",
+	"patterns": [
+		{ "include": "#comments" },
+		{ "include": "#keywords" },
+		{ "include": "#strings" },
+		{ "include": "#typesmola" },
+		{ "include": "#class" },
+		{ "include": "#language" },
+		{ "include": "#nameclass" },
+		{ "include": "#function"},
+		{ "include": "#method-call" },
+		
+		
+		
+
+		{
+			"match": "\\b(catch|try)\\b",
+			"name": "keyword.control.exception.smola"
+		},
+		{
+			"match": ";",
+			"name": "punctuation.terminator.expression.smola"
+		},
+		
+		{
+			"match": "\\.\\.\\.",
+			"name": "keyword.operator.spread.smola"
+		},
+		{
+			"match": "\\.=?",
+			"name": "keyword.operator.string.smola"
+		},
+		{
+			"match": "=>",
+			"name": "keyword.operator.key.smola"
+		},
+		{
+			"captures": {
+				"1": {
+					"name": "keyword.operator.assignment.smola"
+				},
+				"2": {
+					"name": "storage.modifier.reference.smola"
+				},
+				"3": {
+					"name": "storage.modifier.reference.smola"
+				}
+			},
+			"match": "(?i)(\\=)(&)|(&)(?=[$a-z_])"
+		},
+		{
+			"match": "@",
+			"name": "keyword.operator.error-control.smola"
+		},
+		{
+			"match": "===|==|!==|!=|<>",
+			"name": "keyword.operator.comparison.smola"
+		},
+		{
+			"match": "=|\\+=|\\-=|\\*\\*?=|/=|%=|&=|\\|=|\\^=|<<=|>>=|\\?\\?=",
+			"name": "keyword.operator.assignment.smola"
+		},
+		{
+			"match": "<=>|<=|>=|<|>",
+			"name": "keyword.operator.comparison.smola"
+		},
+		{
+			"match": "\\-\\-|\\+\\+",
+			"name": "keyword.operator.increment-decrement.smola"
+		},
+		{
+			"match": "\\-|\\+|\\*\\*?|/|%",
+			"name": "keyword.operator.arithmetic.smola"
+		},
+		{
+			"match": "(?i)(!|&&|\\|\\|)|\\b(and|or|xor|as)\\b",
+			"name": "keyword.operator.logical.smola"
+		},
+		{
+			"match": "<<|>>|~|\\^|&|\\|",
+			"name": "keyword.operator.bitwise.smola"
+		},
+		
+		{ "include": "#variable" },
+		{ "include": "#parameter" }
+	],
+	"repository": {
+		
+		
+		"comments": {
+			"patterns": [
+				{
+					"begin": "/\\*\\*(?=\\s)",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.definition.comment.smola"
+						}
+					},
+					"end": "\\*/",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.comment.smola"
+						}
+					},
+					"name": "comment.block.documentation.phpdoc.smola"
+				},
+				{
+					"begin": "/\\*",
+					"captures": {
+						"0": {
+							"name": "punctuation.definition.comment.smola"
+						}
+					},
+					"end": "\\*/",
+					"name": "comment.block.smola"
+				},
+				{
+					"begin": "(^\\s+)?(?=//)",
+					"beginCaptures": {
+						"1": {
+							"name": "punctuation.whitespace.comment.leading.smola"
+						}
+					},
+					"end": "(?!\\G)",
+					"patterns": [
+						{
+							"begin": "//",
+							"beginCaptures": {
+								"0": {
+									"name": "punctuation.definition.comment.smola"
+								}
+							},
+							"end": "\\n|(?=\\?>)",
+							"name": "comment.line.double-slash.smola"
+						}
+					]
+				},
+				{
+					"begin": "(^\\s+)?(?=#)(?!#\\[)",
+					"beginCaptures": {
+						"1": {
+							"name": "punctuation.whitespace.comment.leading.smola"
+						}
+					},
+					"end": "(?!\\G)",
+					"patterns": [
+						{
+							"begin": "#",
+							"beginCaptures": {
+								"0": {
+									"name": "punctuation.definition.comment.smola"
+								}
+							},
+							"end": "\\n|(?=\\?>)",
+							"name": "comment.line.number-sign.smola"
+						}
+					]
+				}
+			]
+		},
+
+		"regex-double-quoted": {
+			"begin": "\"/(?=(\\\\.|[^\"/])++/[imsxeADSUXu]*\")",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.definition.string.begin.smola"
+				}
+			},
+			"end": "(/)([imsxeADSUXu]*)(\")",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.definition.string.end.smola"
+				}
+			},
+			"name": "string.regexp.double-quoted.smola",
+			"patterns": [
+				{
+					"match": "(\\\\){1,2}[.$^\\[\\]{}]",
+					"name": "constant.character.escape.regex.smola"
+				},
+				{
+					"include": "#interpolation_double_quoted"
+				},
+				{
+					"captures": {
+						"1": {
+							"name": "punctuation.definition.arbitrary-repetition.smola"
+						},
+						"3": {
+							"name": "punctuation.definition.arbitrary-repetition.smola"
+						}
+					},
+					"match": "({)\\d+(,\\d+)?(})",
+					"name": "string.regexp.arbitrary-repetition.smola"
+				},
+				{
+					"begin": "\\[(?:\\^?\\])?",
+					"captures": {
+						"0": {
+							"name": "punctuation.definition.character-class.smola"
+						}
+					},
+					"end": "\\]",
+					"name": "string.regexp.character-class.smola",
+					"patterns": [
+						{
+							"include": "#interpolation_double_quoted"
+						}
+					]
+				},
+				{
+					"match": "[$^+*]",
+					"name": "keyword.operator.regexp.smola"
+				}
+			]
+		},
+		"regex-single-quoted": {
+			"begin": "'/(?=(\\\\(?:\\\\(?:\\\\[\\\\']?|[^'])|.)|[^'/])++/[imsxeADSUXu]*')",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.definition.string.begin.smola"
+				}
+			},
+			"end": "(/)([imsxeADSUXu]*)(')",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.definition.string.end.smola"
+				}
+			},
+			"name": "string.regexp.single-quoted.smola",
+			"patterns": [
+				{
+					"include": "#single_quote_regex_escape"
+				},
+				{
+					"captures": {
+						"1": {
+							"name": "punctuation.definition.arbitrary-repetition.smola"
+						},
+						"3": {
+							"name": "punctuation.definition.arbitrary-repetition.smola"
+						}
+					},
+					"match": "({)\\d+(,\\d+)?(})",
+					"name": "string.regexp.arbitrary-repetition.smola"
+				},
+				{
+					"begin": "\\[(?:\\^?\\])?",
+					"captures": {
+						"0": {
+							"name": "punctuation.definition.character-class.smola"
+						}
+					},
+					"end": "\\]",
+					"name": "string.regexp.character-class.smola"
+				},
+				{
+					"match": "[$^+*]",
+					"name": "keyword.operator.regexp.smola"
+				}
+			]
+		},
+		"scope-resolution": {
+			"patterns": [
+				{
+					"match": "([A-Za-z_\\x{7f}-\\x{10ffff}\\\\][A-Za-z0-9_\\x{7f}-\\x{10ffff}\\\\]*)(?=\\s*::)",
+					"captures": {
+						"1": {
+							"patterns": [
+								{
+									"match": "\\b(self|static|parent)\\b",
+									"name": "storage.type.smola"
+								},
+								{
+									"include": "#class-name"
+								},
+								{
+									"include": "#variable-name"
+								}
+							]
+						}
+					}
+				},
+				{
+					"begin": "(?i)(::)\\s*([a-z_\\x{7f}-\\x{10ffff}][a-z0-9_\\x{7f}-\\x{10ffff}]*)\\s*(\\()",
+					"beginCaptures": {
+						"1": {
+							"name": "keyword.operator.class.smola"
+						},
+						"2": {
+							"name": "entity.name.function.smola"
+						},
+						"3": {
+							"name": "punctuation.definition.arguments.begin.bracket.round.smola"
+						}
+					},
+					"end": "\\)|(?=\\?>)",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.arguments.end.bracket.round.smola"
+						}
+					},
+					"name": "meta.method-call.static.smola",
+					"patterns": [
+						{
+							"include": "#named-arguments"
+						},
+						{
+							"include": "$self"
+						}
+					]
+				},
+				{
+					"match": "(?i)(::)\\s*(class)\\b",
+					"captures": {
+						"1": {
+							"name": "keyword.operator.class.smola"
+						},
+						"2": {
+							"name": "keyword.other.class.smola"
+						}
+					}
+				},
+				{
+					"match": "(?xi)\n(::)\\s*\n(?:\n  ((\\$+)[a-z_\\x{7f}-\\x{10ffff}][a-z0-9_\\x{7f}-\\x{10ffff}]*) # Variable\n  |\n  ([a-z_\\x{7f}-\\x{10ffff}][a-z0-9_\\x{7f}-\\x{10ffff}]*)       # Constant\n)?",
+					"captures": {
+						"1": {
+							"name": "keyword.operator.class.smola"
+						},
+						"2": {
+							"name": "variable.other.class.smola"
+						},
+						"3": {
+							"name": "punctuation.definition.variable.smola"
+						},
+						"4": {
+							"name": "constant.other.class.smola"
+						}
+					}
+				}
+			]
+		},
+		"single_quote_regex_escape": {
+			"match": "\\\\(?:\\\\(?:\\\\[\\\\']?|[^'])|.)",
+			"name": "constant.character.escape.smola"
+		},
+		"sql-string-double-quoted": {
+			"begin": "\"\\s*(?=(SELECT|INSERT|UPDATE|DELETE|CREATE|REPLACE|ALTER|AND|WITH)\\b)",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.definition.string.begin.smola"
+				}
+			},
+			"contentName": "source.sql.embedded.smola",
+			"end": "\"",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.definition.string.end.smola"
+				}
+			},
+			"name": "string.quoted.double.sql.smola",
+			"patterns": [
+				{
+					"match": "(#)(\\\\\"|[^\"])*(?=\"|$)",
+					"name": "comment.line.number-sign.sql",
+					"captures": {
+						"1": {
+							"name": "punctuation.definition.comment.sql"
+						}
+					}
+				},
+				{
+					"match": "(--)(\\\\\"|[^\"])*(?=\"|$)",
+					"name": "comment.line.double-dash.sql",
+					"captures": {
+						"1": {
+							"name": "punctuation.definition.comment.sql"
+						}
+					}
+				},
+				{
+					"match": "\\\\[\\\\\"`']",
+					"name": "constant.character.escape.smola"
+				},
+				{
+					"match": "'(?=((\\\\')|[^'\"])*(\"|$))",
+					"name": "string.quoted.single.unclosed.sql"
+				},
+				{
+					"match": "`(?=((\\\\`)|[^`\"])*(\"|$))",
+					"name": "string.quoted.other.backtick.unclosed.sql"
+				},
+				{
+					"begin": "'",
+					"end": "'",
+					"name": "string.quoted.single.sql",
+					"patterns": [
+						{
+							"include": "#interpolation_double_quoted"
+						}
+					]
+				},
+				{
+					"begin": "`",
+					"end": "`",
+					"name": "string.quoted.other.backtick.sql",
+					"patterns": [
+						{
+							"include": "#interpolation_double_quoted"
+						}
+					]
+				},
+				{
+					"include": "#interpolation_double_quoted"
+				},
+				{
+					"include": "source.sql"
+				}
+			]
+		},
+		"sql-string-single-quoted": {
+			"begin": "'\\s*(?=(SELECT|INSERT|UPDATE|DELETE|CREATE|REPLACE|ALTER|AND|WITH)\\b)",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.definition.string.begin.smola"
+				}
+			},
+			"contentName": "source.sql.embedded.smola",
+			"end": "'",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.definition.string.end.smola"
+				}
+			},
+			"name": "string.quoted.single.sql.smola",
+			"patterns": [
+				{
+					"match": "(#)(\\\\'|[^'])*(?='|$)",
+					"name": "comment.line.number-sign.sql",
+					"captures": {
+						"1": {
+							"name": "punctuation.definition.comment.sql"
+						}
+					}
+				},
+				{
+					"match": "(--)(\\\\'|[^'])*(?='|$)",
+					"name": "comment.line.double-dash.sql",
+					"captures": {
+						"1": {
+							"name": "punctuation.definition.comment.sql"
+						}
+					}
+				},
+				{
+					"match": "\\\\[\\\\'`\"]",
+					"name": "constant.character.escape.smola"
+				},
+				{
+					"match": "`(?=((\\\\`)|[^`'])*('|$))",
+					"name": "string.quoted.other.backtick.unclosed.sql"
+				},
+				{
+					"match": "\"(?=((\\\\\")|[^\"'])*('|$))",
+					"name": "string.quoted.double.unclosed.sql"
+				},
+				{
+					"include": "source.sql"
+				}
+			]
+		},
+		"string-backtick": {
+			"begin": "`",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.definition.string.begin.smola"
+				}
+			},
+			"end": "`",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.definition.string.end.smola"
+				}
+			},
+			"name": "string.interpolated.smola",
+			"patterns": [
+				{
+					"match": "\\\\`",
+					"name": "constant.character.escape.smola"
+				},
+				{
+					"include": "#interpolation"
+				}
+			]
+		},
+		"string-double-quoted": {
+			"begin": "\"",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.definition.string.begin.smola"
+				}
+			},
+			"end": "\"",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.definition.string.end.smola"
+				}
+			},
+			"name": "string.quoted.double.smola"
+		},
+		"string-single-quoted": {
+			"begin": "'",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.definition.string.begin.smola"
+				}
+			},
+			"end": "'",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.definition.string.end.smola"
+				}
+			},
+			"name": "string.quoted.single.smola",
+			"patterns": [
+				{
+					"match": "\\\\[\\\\']",
+					"name": "constant.character.escape.smola"
+				}
+			]
+		},
+
+		"strings": {
+			"patterns": [
+				{
+					"include": "#sql-string-double-quoted"
+				},
+				{
+					"include": "#string-double-quoted"
+				}
+			]
+		},
+		
+
+		"interpolation": {
+			"patterns": [
+				{
+					"match": "\\\\[0-7]{1,3}",
+					"name": "constant.character.escape.octal.smola"
+				},
+				{
+					"match": "\\\\x[0-9A-Fa-f]{1,2}",
+					"name": "constant.character.escape.hex.smola"
+				},
+				{
+					"match": "\\\\u{[0-9A-Fa-f]+}",
+					"name": "constant.character.escape.unicode.smola"
+				},
+				{
+					"match": "\\\\[nrtvef$\\\\]",
+					"name": "constant.character.escape.smola"
+				},
+				{
+					"begin": "{(?=\\$.*?})",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.definition.variable.smola"
+						}
+					},
+					"end": "}",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.variable.smola"
+						}
+					},
+					"patterns": [
+						{
+							"include": "$self"
+						}
+					]
+				},
+				{
+					"include": "#variable-name"
+				}
+			]
+		},
+		"interpolation_double_quoted": {
+			"patterns": [
+				{
+					"match": "\\\\\"",
+					"name": "constant.character.escape.smola"
+				},
+				{
+					"include": "#interpolation"
+				}
+			]
+		},
+
+		
+
+		"variable-name": {
+			"patterns": [
+				{
+					"captures": {
+						"1": {
+							"name": "variable.other.smola"
+						},
+						"4": {
+							"name": "keyword.operator.class.smola"
+						},
+						"5": {
+							"name": "variable.other.property.smola"
+						},
+						"6": {
+							"name": "punctuation.section.array.begin.smola"
+						},
+						"7": {
+							"name": "constant.numeric.index.smola"
+						},
+						"8": {
+							"name": "variable.other.index.smola"
+						},
+						"9": {
+							"name": "punctuation.definition.variable.smola"
+						},
+						"10": {
+							"name": "string.unquoted.index.smola"
+						},
+						"11": {
+							"name": "punctuation.section.array.end.smola"
+						}
+					},
+					"match": "(?xi)\n((?<name>[a-z_\\x{7f}-\\x{10ffff}][a-z0-9_\\x{7f}-\\x{10ffff}]*))\\s*\n(?:\n  (\\??->)\\s*(\\g<name>)\n  |\n  (\\[)(?:(\\d+)|((\\$)\\g<name>)|([a-z_\\x{7f}-\\x{10ffff}][a-z0-9_\\x{7f}-\\x{10ffff}]*))(\\])\n)?"
+				},
+				{
+					"captures": {
+						"1": {
+							"name": "variable.other.smola"
+						},
+						"2": {
+							"name": "punctuation.definition.variable.smola"
+						},
+						"4": {
+							"name": "punctuation.definition.variable.smola"
+						}
+					},
+					"match": "(?i)((\\${)(?<name>[a-z_\\x{7f}-\\x{10ffff}][a-z0-9_\\x{7f}-\\x{10ffff}]*)(}))"
+				}
+			]
+		},
+		
+		"typesmola": {
+			"patterns": [{
+				"name": "keyword.other.type.smola",
+				"match": "\\b(Blob|Boolean|Integer|UInteger|Float|String|ModelInstance|Time|TimeDiff|Struct|Map|Oid|Address|Set|List|VariableContainer|Vary|Deque|ModelType|Vector|Pair|BidirectionalMultiMap|RWMutex|ODType|ODInstance|Type|UUID|DBBuffer|ODStorage|TcpClient|TcpServer|TcpConnection|Iterator|ReverseIterator|WriteLock|ReadLock|TSStorage|TSTable|TSAccessor)\\b"
+			}]
+		},
+		"keywords": {
+			"patterns": [{
+				"name": "keyword.control.${1:/downcase}.smola",
+				"match": "\\b(try|catch|singleShotTimer|periodicTimer|if|else|while|foreach|for|delete|from|clear|break|contains|sizeOf|typeOf|popBack|popFront|pushBack|pushFront|newModelInstance|deleteModelInstance|emitEvent|insertElement|updateElement|registerHandler|deleteElement|sleep|serialize|deserialize|serializeValue|deserializeValue|serializeV3|deserializeV3|serializeValueV3|deserializeValueV3|readLock|unlock|writeLock|hash|toDec|toHex|fromDec|fromHex|fromBase64|toBase64|currentTime|convert|and|in|is|not|AND|NOT|or|OR|xor|XOR|True|False|TRUE|FALSE|true|false)\\b"
+			}]
+		},
+		"numeric": {
+			"patterns": [{
+				"name": "constant.numeric.smola",
+				"match": "\\b(-)?[0-9.]+\\b"
+			}]
+		},		
+		"variable": {
+			"patterns": [{
+				"name": "variable.other.smola",
+				"match": "\\b&?\\w+\\b"
+			}]
+		},
+		"parameter": {
+			"patterns": [{
+				"name": "variable.parameter.smola",
+				"match": "\\b(thisModelType|thisModelInstance|parentModelType)\\b"
+			}]
+		},
+		"class": {
+			"patterns": [{
+				"name": "storage.type.class.smola",
+				"match": "\\b(Method|Struct|EntryPoint|Import)\\b"
+			}]
+		},
+		"language": {
+			"patterns": [{
+				"name": "constant.language.smola",
+				"match": "\\b(static)\\b"
+			}]
+		},
+		"nameclass": {
+			"patterns": [{
+				"name": "constant.class.smola",
+				"match": "\\@\\w+"
+			}]
+		},
+		
+		"method-call": {
+			"patterns": [{
+				"name": "meta.method-call.smola",
+				"match": "::&?\\w+"
+			}]
+		},
+		"function": {
+			"patterns": [{
+				"name": "entity.name.function.smola",
+				"match": "(::&?)?\\w+\\("
+			}]
+		}
+	}
+}

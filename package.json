@@ -1,0 +1,25 @@
+{
+    "name": "xxc",
+    "displayName": "Smola",
+    "description": "Smola",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.64.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "smola",
+            "aliases": ["Smola", "smola"],
+            "extensions": [".xxc"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "smola",
+            "scopeName": "source.smola",
+            "path": "./syntaxes/smola.tmLanguage.json"
+        }]
+    }
+}
