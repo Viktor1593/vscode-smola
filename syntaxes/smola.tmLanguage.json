@@ -13,9 +13,6 @@
 		{ "include": "#function"},
 		{ "include": "#method-call" },
 		
-		
-		
-
 		{
 			"match": "\\b(catch|try)\\b",
 			"name": "keyword.control.exception.smola"
@@ -88,8 +85,6 @@
 		{ "include": "#parameter" }
 	],
 	"repository": {
-		
-		
 		"comments": {
 			"patterns": [
 				{
@@ -709,9 +704,25 @@
 		},
 		"function": {
 			"patterns": [{
-				"name": "entity.name.function.smola",
-				"match": "(::&?)?\\w+\\("
+				"captures": {
+					"1": {
+						"name": "entity.name.function.smola"
+					},
+					"2": {
+						"name": "entity.name.function.smola"
+					}
+				},
+				"match": "(::&?)?(\\w+)\\("
 			}]
+		},
+		
+		"constants": {
+			"patterns": [
+				{
+					"match": "(\\W+)",
+					"name": "constant.language.smola"
+				}
+			]
 		}
 	}
 }
