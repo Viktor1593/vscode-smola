@@ -706,10 +706,13 @@
 						"name": "meta.method-call.smola"
 					},
 					"5": {
+						"name": "storage.modifier.reference.smola"
+					},
+					"6": {
 						"name": "entity.name.function.smola"
 					}
 				},
-				"match": "(((::)|(-\\>))&?)?(\\w+)\\("
+				"match": "(((::)|(-\\>))(&?))?(\\w+)\\(\\)"
 			}]
 		},
 		
