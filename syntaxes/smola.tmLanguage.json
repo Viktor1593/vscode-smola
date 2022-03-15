@@ -650,13 +650,13 @@
 		"typesmola": {
 			"patterns": [{
 				"name": "keyword.other.type.smola",
-				"match": "\\b(Blob|Boolean|Integer|UInteger|Float|String|ModelInstance|Time|TimeDiff|Struct|Map|Oid|Address|Set|List|VariableContainer|Vary|Deque|ModelType|Vector|Pair|BidirectionalMultiMap|RWMutex|ODType|ODInstance|Type|UUID|DBBuffer|ODStorage|TcpClient|TcpServer|TcpConnection|Iterator|ReverseIterator|WriteLock|ReadLock|TSStorage|TSTable|TSAccessor)\\b"
+				"match": "\\b(PCRE|IndexedMultimap|LogCLog|Blob|Boolean|Integer|UInteger|Float|String|ModelInstance|Time|TimeDiff|Struct|Map|Oid|Address|Set|List|VariableContainer|Vary|Deque|ModelType|Vector|Pair|BidirectionalMultiMap|RWMutex|ODType|ODInstance|Type|UUID|DBBuffer|ODStorage|TcpClient|TcpServer|TcpConnection|Iterator|ReverseIterator|WriteLock|ReadLock|TSStorage|TSTable|TSAccessor)\\b"
 			}]
 		},
 		"keywords": {
 			"patterns": [{
 				"name": "keyword.control.${1:/downcase}.smola",
-				"match": "\\b(switch|case|try|catch|singleShotTimer|periodicTimer|if|else|while|foreach|for|delete|from|clear|break|contains|sizeOf|typeOf|popBack|popFront|pushBack|pushFront|newModelInstance|deleteModelInstance|emitEvent|insertElement|updateElement|registerHandler|deleteElement|sleep|serialize|deserialize|serializeValue|deserializeValue|serializeV3|deserializeV3|serializeValueV3|deserializeValueV3|readLock|unlock|writeLock|hash|toDec|toHex|fromDec|fromHex|fromBase64|toBase64|currentTime|convert|and|in|is|not|AND|NOT|or|OR|xor|XOR|True|False|TRUE|FALSE|true|false)\\b"
+				"match": "\\b(return|switch|case|try|catch|singleShotTimer|periodicTimer|if|else|while|foreach|for|delete|from|clear|break|contains|sizeOf|typeOf|popBack|popFront|pushBack|pushFront|newModelInstance|deleteModelInstance|emitEvent|insertElement|updateElement|registerHandler|deleteElement|sleep|serialize|deserialize|serializeValue|deserializeValue|serializeV3|deserializeV3|serializeValueV3|deserializeValueV3|readLock|unlock|writeLock|hash|toDec|toHex|fromDec|fromHex|fromBase64|toBase64|currentTime|convert|and|in|is|not|AND|NOT|or|OR|xor|XOR|True|False|TRUE|FALSE|true|false)\\b"
 			}]
 		},
 		
@@ -696,24 +696,20 @@
 				"match": "\\@\\w+"
 			}]
 		},
-		
-		"method-call": {
-			"patterns": [{
-				"name": "meta.method-call.smola",
-				"match": "::&?\\w+"
-			}]
-		},
 		"function": {
 			"patterns": [{
 				"captures": {
 					"1": {
-						"name": "entity.name.function.smola"
+						"name": "keyword.operator.class.smola"
 					},
 					"2": {
+						"name": "meta.method-call.smola"
+					},
+					"5": {
 						"name": "entity.name.function.smola"
 					}
 				},
-				"match": "(::&?)?(\\w+)\\("
+				"match": "(((::)|(-\\>))&?)?(\\w+)\\("
 			}]
 		},
 		
