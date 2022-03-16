@@ -6,14 +6,16 @@
 		{ "include": "#comments" },
 		{ "include": "#keywords" },
 		{ "include": "#strings" },
-		{ "include": "#typesmola" },
+		{ "include": "#smola-types" },
+		{ "include": "#method" },
 		{ "include": "#class" },
 		{ "include": "#language" },
 		{ "include": "#nameclass" },
 		{ "include": "#constants" },
 		{ "include": "#function"},
 		{ "include": "#method-call" },
-
+		{ "include": "#numbers" },
+		
 		{
 			"match": "\\b(catch|try)\\b",
 			"name": "keyword.control.exception.smola"
@@ -157,7 +159,7 @@
 				}
 			]
 		},
-
+		
 		"regex-double-quoted": {
 			"begin": "\"/(?=(\\\\.|[^\"/])++/[imsxeADSUXu]*\")",
 			"beginCaptures": {
@@ -648,16 +650,16 @@
 			]
 		},
 		
-		"typesmola": {
+		"smola-types": {
 			"patterns": [{
-				"name": "keyword.other.type.smola",
+				"name": "support.class.smola",
 				"match": "\\b(PCRE|IndexedMultimap|LogCLog|Blob|Boolean|Integer|UInteger|Float|String|ModelInstance|Time|TimeDiff|Struct|Map|Oid|Address|Set|List|VariableContainer|Vary|Deque|ModelType|Vector|Pair|BidirectionalMultiMap|RWMutex|ODType|ODInstance|Type|UUID|DBBuffer|ODStorage|TcpClient|TcpServer|TcpConnection|Iterator|ReverseIterator|WriteLock|ReadLock|TSStorage|TSTable|TSAccessor)\\b"
 			}]
 		},
 		"keywords": {
 			"patterns": [{
 				"name": "keyword.control.${1:/downcase}.smola",
-				"match": "\\b(continue|break|default|return|switch|case|try|catch|singleShotTimer|periodicTimer|if|else|while|foreach|for|delete|from|clear|break|contains|sizeOf|typeOf|popBack|popFront|pushBack|pushFront|newModelInstance|deleteModelInstance|emitEvent|insertElement|updateElement|registerHandler|deleteElement|sleep|serialize|deserialize|serializeValue|deserializeValue|serializeV3|deserializeV3|serializeValueV3|deserializeValueV3|readLock|unlock|writeLock|hash|toDec|toHex|fromDec|fromHex|fromBase64|toBase64|currentTime|convert|and|in|is|not|AND|NOT|or|OR|xor|XOR|True|False|TRUE|FALSE|true|false)\\b"
+				"match": "\\b(continue|break|default|return|switch|case|singleShotTimer|periodicTimer|if|else|while|foreach|for|delete|from|clear|break|contains|sizeOf|typeOf|popBack|popFront|pushBack|pushFront|newModelInstance|deleteModelInstance|emitEvent|insertElement|updateElement|registerHandler|deleteElement|sleep|serialize|deserialize|serializeValue|deserializeValue|serializeV3|deserializeV3|serializeValueV3|deserializeValueV3|readLock|unlock|writeLock|hash|toDec|toHex|fromDec|fromHex|fromBase64|toBase64|currentTime|convert|and|in|is|not|AND|NOT|or|OR|xor|XOR)\\b"
 			}]
 		},
 		
@@ -679,10 +681,16 @@
 				"match": "\\b(thisModelType|thisModelInstance|parentModelType)\\b"
 			}]
 		},
+		"method": {
+			"patterns": [{
+				"name": "storage.type.function.smola",
+				"match": "\\b(Method)\\b"
+			}]
+		},
 		"class": {
 			"patterns": [{
 				"name": "storage.type.class.smola",
-				"match": "\\b(Method|Struct|EntryPoint|Import)\\b"
+				"match": "\\b(Struct|EntryPoint|Import)\\b"
 			}]
 		},
 		"language": {
@@ -717,8 +725,48 @@
 			}]
 		},
 		
+		"numbers": {
+			"patterns": [
+				{
+					"match": "0[xX][0-9a-fA-F]+(?:_[0-9a-fA-F]+)*",
+					"name": "constant.numeric.hex.smola"
+				},
+				{
+					"match": "0[bB][01]+(?:_[01]+)*",
+					"name": "constant.numeric.binary.smola"
+				},
+				{
+					"match": "0[oO][0-7]+(?:_[0-7]+)*",
+					"name": "constant.numeric.octal.smola"
+				},
+				{
+					"match": "0(?:_?[0-7]+)+",
+					"name": "constant.numeric.octal.smola"
+				},
+				{
+					"match": "(?x)\n(?:\n  (?:[0-9]+(?:_[0-9]+)*)?(\\.)[0-9]+(?:_[0-9]+)*(?:[eE][+-]?[0-9]+(?:_[0-9]+)*)?| # .3\n  [0-9]+(?:_[0-9]+)*(\\.)(?:[0-9]+(?:_[0-9]+)*)?(?:[eE][+-]?[0-9]+(?:_[0-9]+)*)?| # 3.\n  [0-9]+(?:_[0-9]+)*[eE][+-]?[0-9]+(?:_[0-9]+)*                                   # 2e-3\n)",
+					"name": "constant.numeric.decimal.smola",
+					"captures": {
+						"1": {
+							"name": "punctuation.separator.decimal.period.smola"
+						},
+						"2": {
+							"name": "punctuation.separator.decimal.period.smola"
+						}
+					}
+				},
+				{
+					"match": "0|[1-9](?:_?[0-9]+)*",
+					"name": "constant.numeric.decimal.smola"
+				}
+			]
+		},
 		"constants": {
 			"patterns": [
+				{
+					"match": "(?i)\\b(TRUE|FALSE|NULL)\\b",
+					"name": "constant.language.smola"
+				},
 				{
 					"match": "(log)\\((\\w+)\\)",
 					"captures": {
