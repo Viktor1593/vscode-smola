@@ -656,7 +656,7 @@
 		"keywords": {
 			"patterns": [{
 				"name": "keyword.control.${1:/downcase}.smola",
-				"match": "\\b(default|return|switch|case|try|catch|singleShotTimer|periodicTimer|if|else|while|foreach|for|delete|from|clear|break|contains|sizeOf|typeOf|popBack|popFront|pushBack|pushFront|newModelInstance|deleteModelInstance|emitEvent|insertElement|updateElement|registerHandler|deleteElement|sleep|serialize|deserialize|serializeValue|deserializeValue|serializeV3|deserializeV3|serializeValueV3|deserializeValueV3|readLock|unlock|writeLock|hash|toDec|toHex|fromDec|fromHex|fromBase64|toBase64|currentTime|convert|and|in|is|not|AND|NOT|or|OR|xor|XOR|True|False|TRUE|FALSE|true|false)\\b"
+				"match": "\\b(continue|break|default|return|switch|case|try|catch|singleShotTimer|periodicTimer|if|else|while|foreach|for|delete|from|clear|break|contains|sizeOf|typeOf|popBack|popFront|pushBack|pushFront|newModelInstance|deleteModelInstance|emitEvent|insertElement|updateElement|registerHandler|deleteElement|sleep|serialize|deserialize|serializeValue|deserializeValue|serializeV3|deserializeV3|serializeValueV3|deserializeValueV3|readLock|unlock|writeLock|hash|toDec|toHex|fromDec|fromHex|fromBase64|toBase64|currentTime|convert|and|in|is|not|AND|NOT|or|OR|xor|XOR|True|False|TRUE|FALSE|true|false)\\b"
 			}]
 		},
 		
