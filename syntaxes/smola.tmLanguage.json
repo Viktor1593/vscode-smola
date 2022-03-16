@@ -10,6 +10,7 @@
 		{ "include": "#class" },
 		{ "include": "#language" },
 		{ "include": "#nameclass" },
+		{ "include": "#constants" },
 		{ "include": "#function"},
 		{ "include": "#method-call" },
 
@@ -719,8 +720,15 @@
 		"constants": {
 			"patterns": [
 				{
-					"match": "(\\W+)",
-					"name": "constant.language.smola"
+					"match": "(log)\\((\\w+)\\)",
+					"captures": {
+						"1": {
+							"name": "entity.name.function.smola"
+						},
+						"2": {
+							"name": "constant.language.smola"
+						}
+					}
 				}
 			]
 		}
