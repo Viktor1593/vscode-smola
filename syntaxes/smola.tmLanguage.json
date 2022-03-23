@@ -12,14 +12,15 @@
 		{ "include": "#language" },
 		{ "include": "#nameclass" },
 		{ "include": "#constants" },
-		{ "include": "#function"},
-		{ "include": "#method-call" },
-		{ "include": "#numbers" },
-		
 		{
 			"match": "\\b(catch|try)\\b",
 			"name": "keyword.control.exception.smola"
 		},
+
+		{ "include": "#function"},
+		{ "include": "#method-call" },
+		{ "include": "#numbers" },
+		
 		{
 			"match": ";",
 			"name": "punctuation.terminator.expression.smola"
@@ -507,7 +508,12 @@
 					"name": "punctuation.definition.string.end.smola"
 				}
 			},
-			"name": "string.quoted.double.smola"
+			"name": "string.quoted.double.smola",
+			"patterns": [
+				{
+					"include": "#interpolation_double_quoted"
+				}
+			]
 		},
 		"string-single-quoted": {
 			"begin": "'",
@@ -543,6 +549,7 @@
 		},
 		
 
+
 		"interpolation": {
 			"patterns": [
 				{
@@ -555,6 +562,10 @@
 				},
 				{
 					"match": "\\\\u{[0-9A-Fa-f]+}",
+					"name": "constant.character.escape.unicode.smola"
+				},
+				{
+					"match": "\\c[\\w\\d]+}",
 					"name": "constant.character.escape.unicode.smola"
 				},
 				{
@@ -580,8 +591,20 @@
 						}
 					]
 				},
+
 				{
-					"include": "#variable-name"
+					"captures": {
+						"1": {
+							"name": "constant.character.format.placeholder.other.python"
+						},
+						"2": {
+							"name": "variable.other.smola"
+						},
+						"3": {
+							"name": "constant.character.format.placeholder.other.python"
+						}
+					},
+					"match": "(%)(\\w+)(%)"
 				}
 			]
 		},
@@ -721,7 +744,7 @@
 						"name": "entity.name.function.smola"
 					}
 				},
-				"match": "(((::)|(-\\>))(&?))?(\\w+)\\("
+				"match": "(((::)|(-\\>))(&?))?(\\w+)\\s*\\("
 			}]
 		},
 		
