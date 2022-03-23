@@ -565,7 +565,7 @@
 					"name": "constant.character.escape.unicode.smola"
 				},
 				{
-					"match": "\\c[\\w\\d]+}",
+					"match": "\\\\c([\\w\\d])+",
 					"name": "constant.character.escape.unicode.smola"
 				},
 				{
