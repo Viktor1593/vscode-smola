@@ -569,6 +569,10 @@
 					"name": "constant.character.escape.unicode.smola"
 				},
 				{
+					"match": "\\\\d",
+					"name": "constant.character.escape.unicode.smola"
+				},
+				{
 					"match": "\\\\[nrtvef$\\\\]",
 					"name": "constant.character.escape.smola"
 				},
