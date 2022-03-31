@@ -1,5 +1,5 @@
 {
-    "parseResult":{
+    "Method parseResult":{
         "scope": "smola",
         "prefix": "mpr",
         "body": [
@@ -9,7 +9,7 @@
             "}"
         ]
     },
-    "setData":{
+    "Method setData":{
         "scope": "smola",
         "prefix": "msd",
         "body": [
@@ -19,7 +19,7 @@
             "}"
         ]
     },
-    "setDataMulti":{
+    "Method setDataMulti":{
         "scope": "smola",
         "prefix": "msdm",
         "body": [
