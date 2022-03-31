@@ -20,6 +20,12 @@
             "language": "smola",
             "scopeName": "source.smola",
             "path": "./syntaxes/smola.tmLanguage.json"
-        }]
+        }],
+        "snippets": [
+            {
+                "language": "smola",
+                "path": "./snippets/snippets.code-snippets"
+            }
+        ]
     }
 }

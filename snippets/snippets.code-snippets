@@ -1,0 +1,32 @@
+{
+    "parseResult":{
+        "scope": "smola",
+        "prefix": "mpr",
+        "body": [
+            "Method parseResult(String &fullOutput, Vector(VariableContainer) &parsedOutput, Vector(String) ids, ModelInstance &master, ModelInstance &slave)",
+            "{",
+            "    ",
+            "}"
+        ]
+    },
+    "setData":{
+        "scope": "smola",
+        "prefix": "msd",
+        "body": [
+            "Method setData(Map(String, Integer) &rowIndex, Vector(VariableContainer) &resultData, Vector(Time) &rowTimes, ModelInstance &master, ModelInstance &slave)",
+            "{",
+            "    ",
+            "}"
+        ]
+    },
+    "setDataMulti":{
+        "scope": "smola",
+        "prefix": "msdm",
+        "body": [
+            "Method setDataMulti(Map(String, Integer) &rowIndex, Vector(VariableContainer) &sourceData, VariableContainer &resultData, Vector(Time) &rowTimes, ModelInstance &master, ModelInstance &slave)",
+            "{",
+            "    ",
+            "}"
+        ]
+    }
+}
