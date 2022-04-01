@@ -31,7 +31,7 @@
     },
     "Method afterAll":{
         "scope": "smola",
-        "prefix": "msdm",
+        "prefix": "maa",
         "body": [
             "Method afterAll(ModelInstance &master, ModelInstance &slave)",
             "{",
